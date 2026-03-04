@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  eth-monitor:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      # Add your RPC URL here (Infura/Alchemy free tier)
+      # Get one free at: https://app.infura.io or https://www.alchemy.com
+      - ETH_RPC_URL=${ETH_RPC_URL:-https://mainnet.infura.io/v3/f6655864a2b54b6b9d7fbad2f555e26a}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
