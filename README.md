@@ -1,5 +1,4 @@
 # ⟠ Ethereum Node Monitor & Validator Dashboard
-
 A real-time monitoring dashboard for Ethereum mainnet node health, block tracking, gas analytics, and validator metrics — built with Python, Streamlit, Web3.py, and Docker.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
@@ -9,8 +8,13 @@ A real-time monitoring dashboard for Ethereum mainnet node health, block trackin
 
 ---
 
-## 🚀 Features
+## 🌐 Live Demo
 
+👉 **[ethereum-node-monitor-validator-dashboard.streamlit.app](https://ethereum-node-monitor-validator-dashboard.streamlit.app/)**
+
+---
+
+## 🚀 Features
 - **Live block tracking** — latest block number, block time, transaction count
 - **Gas price monitoring** — base fee, priority fee, 24h historical chart with alert thresholds
 - **Validator metrics** — attestation rates, balances, proposals, rewards
@@ -21,7 +25,6 @@ A real-time monitoring dashboard for Ethereum mainnet node health, block trackin
 ---
 
 ## 🛠 Tech Stack
-
 | Layer | Technology |
 |-------|------------|
 | Frontend | Streamlit, custom CSS |
@@ -35,7 +38,6 @@ A real-time monitoring dashboard for Ethereum mainnet node health, block trackin
 ## 📦 Quick Start
 
 ### Option 1 — Run Locally
-
 ```bash
 # Clone the repo
 git clone https://github.com/Lavi-hk/eth-node-monitor
@@ -51,11 +53,9 @@ cp .env.example .env
 # Run
 streamlit run app.py
 ```
-
 Open `http://localhost:8501` in your browser.
 
 ### Option 2 — Docker
-
 ```bash
 # Build and run
 docker compose up --build
@@ -65,13 +65,11 @@ ETH_RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY docker compose up --build
 ```
 
 ### Option 3 — Demo Mode (no API key needed)
-
 Just run without setting `ETH_RPC_URL`. The dashboard uses realistic simulated Ethereum mainnet data.
 
 ---
 
 ## 🔑 Getting a Free RPC Endpoint
-
 1. **Infura** (recommended): [app.infura.io](https://app.infura.io) → Create project → Copy HTTP endpoint
 2. **Alchemy**: [alchemy.com](https://www.alchemy.com) → Create app → Copy HTTPS URL
 
@@ -80,7 +78,6 @@ Both offer generous free tiers (100k+ requests/day).
 ---
 
 ## 📁 Project Structure
-
 ```
 eth-node-monitor/
 ├── app.py                 # Main Streamlit dashboard
@@ -97,7 +94,6 @@ eth-node-monitor/
 ---
 
 ## 🔮 Roadmap
-
 - [ ] Beacon Chain API integration for real validator data
 - [ ] PostgreSQL persistence for historical metrics
 - [ ] Telegram/Discord alert bot
@@ -107,7 +103,6 @@ eth-node-monitor/
 ---
 
 ## 👩‍💻 Author
-
 **Harpreet Kour** — [github.com/Lavi-hk](https://github.com/Lavi-hk) | [linkedin.com/in/harpreet01kour](https://linkedin.com/in/harpreet01kour)
 
 Built as part of learning blockchain infrastructure and validator node operations.
