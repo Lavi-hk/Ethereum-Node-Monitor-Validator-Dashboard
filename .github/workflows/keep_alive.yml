@@ -1,0 +1,11 @@
+name: Keep Streamlit App Alive
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # every 30 minutes
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit App
+        run: curl -s https://ethereum-node-monitor-validator-dashboard.streamlit.app/ > /dev/null
