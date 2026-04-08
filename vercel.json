@@ -2,18 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "app.py",
-      "use": "@vercel/python"
+      "src": "Dockerfile",
+      "use": "@vercel/docker"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "app.py"
+      "dest": "/"
     }
-  ],
-  "env": {
-    "STREAMLIT_SERVER_HEADLESS": "true",
-    "STREAMLIT_SERVER_PORT": "8000"
-  }
+  ]
 }
