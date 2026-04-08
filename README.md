@@ -70,13 +70,26 @@ ETH_RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY docker compose up --build
 Just run without setting `ETH_RPC_URL`. The dashboard uses realistic simulated Ethereum mainnet data.
 
 ### Option 4 — Deploy to Vercel
-1. Fork/clone this repo to your GitHub
-2. Connect your GitHub to [Vercel](https://vercel.com)
-3. Import the project
-4. Set environment variables in Vercel dashboard:
+1. Push your code to GitHub (see above)
+2. Go to [Vercel](https://vercel.com) and import your GitHub repo
+3. Set environment variables in Vercel dashboard:
    - `GEMINI_API_KEY`: Your Google Gemini API key
    - `ETH_RPC_URL`: Your Ethereum RPC endpoint (optional for demo mode)
+4. In Vercel project settings, set:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `streamlit run app.py --server.port $PORT --server.headless true --server.enableCORS false`
 5. Deploy!
+
+**Note**: Vercel support for Streamlit is experimental. If issues arise, consider Streamlit Cloud below.
+
+### Option 5 — Deploy to Streamlit Cloud (Recommended for Streamlit apps)
+1. Push your code to GitHub
+2. Go to [Streamlit Cloud](https://share.streamlit.io)
+3. Connect your GitHub repo
+4. Set secrets in the app settings:
+   - `GEMINI_API_KEY`
+   - `ETH_RPC_URL` (optional)
+5. Deploy — it's free and optimized for Streamlit!
 
 ---
 
