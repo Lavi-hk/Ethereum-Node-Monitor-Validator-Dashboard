@@ -80,7 +80,7 @@ Just run without setting `ETH_RPC_URL`. The dashboard uses realistic simulated E
    - **Start Command**: `streamlit run app.py --server.port $PORT --server.headless true --server.enableCORS false`
 5. Deploy!
 
-**Note**: Vercel support for Streamlit is experimental. If issues arise, consider Streamlit Cloud below.
+> **Important:** Vercel does not officially support Streamlit apps as first-class deployments, and the Docker builder package is not available in the Vercel runtime environment. If Vercel continues to fail, use Streamlit Cloud or another host that supports Docker/Streamlit directly.
 
 ### Option 5 — Deploy to Streamlit Cloud (Recommended for Streamlit apps)
 1. Push your code to GitHub
