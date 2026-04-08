@@ -28,11 +28,8 @@ st.set_page_config(
 )
 
 # ── Gemini Setup ─────────────────────────────────────────────────────────────
-import os
-from google import genai
-
 api_key = os.getenv("GEMINI_API_KEY", "your-api-key-here")
-client = genai.Client(api_key=api_key)
+genai_client = genai.Client(api_key=api_key)
 
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
@@ -448,7 +445,7 @@ if prompt := st.chat_input("Ask Gemini..."):
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
         try:
-            response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
+            response = genai_client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
             response_text = response.text
             st.markdown(response_text)
             # Add assistant response to chat history
