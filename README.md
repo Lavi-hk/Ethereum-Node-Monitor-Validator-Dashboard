@@ -19,6 +19,7 @@ A real-time monitoring dashboard for Ethereum mainnet node health, block trackin
 - **Gas price monitoring** — base fee, priority fee, 24h historical chart with alert thresholds
 - **Validator metrics** — attestation rates, balances, proposals, rewards
 - **Network health** — peer count, finality, active validator count, beacon slot/epoch
+- **Gemini AI Chat** — Ask questions about Ethereum, blockchain, or get help with your node
 - **Auto-refresh** — configurable interval (10–60 seconds)
 - **Demo mode** — runs with realistic simulated data even without an API key
 
@@ -28,9 +29,10 @@ A real-time monitoring dashboard for Ethereum mainnet node health, block trackin
 | Layer | Technology |
 |-------|------------|
 | Frontend | Streamlit, custom CSS |
+| AI | Google Gemini AI |
 | Blockchain | Web3.py, Ethereum JSON-RPC |
 | Data | Pandas, real-time simulation |
-| DevOps | Docker, Docker Compose |
+| DevOps | Docker, Docker Compose, Vercel |
 | Language | Python 3.11 |
 
 ---
@@ -66,6 +68,26 @@ ETH_RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY docker compose up --build
 
 ### Option 3 — Demo Mode (no API key needed)
 Just run without setting `ETH_RPC_URL`. The dashboard uses realistic simulated Ethereum mainnet data.
+
+### Option 4 — Deploy to Vercel
+1. Fork/clone this repo to your GitHub
+2. Connect your GitHub to [Vercel](https://vercel.com)
+3. Import the project
+4. Set environment variables in Vercel dashboard:
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - `ETH_RPC_URL`: Your Ethereum RPC endpoint (optional for demo mode)
+5. Deploy!
+
+---
+
+## 🤖 Gemini AI Chat
+The dashboard includes an integrated Gemini AI chat box powered by Google's Gemini Pro model. You can:
+- Ask questions about Ethereum and blockchain technology
+- Get help troubleshooting your node
+- Learn about gas prices, validators, and network health
+- General AI assistance related to crypto
+
+**Setup**: Get your free API key from [Google AI Studio](https://makersuite.google.com/app/apikey) and add it to your `.env` file as `GEMINI_API_KEY`.
 
 ---
 

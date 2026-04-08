@@ -5,6 +5,9 @@ Description: Real-time monitoring dashboard for Ethereum mainnet node health,
              block data, gas prices, and validator metrics.
 """
 
+import os
+from dotenv import load_dotenv
+
 import streamlit as st
 import time
 import random
@@ -12,6 +15,9 @@ from datetime import datetime, timedelta
 from src.eth_client import EthereumClient
 from src.metrics import MetricsCollector
 from src.utils import format_wei_to_gwei, format_large_number, time_ago
+from google import genai
+
+load_dotenv()
 
 # ── Page Config ──────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -20,6 +26,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# ── Gemini Setup ─────────────────────────────────────────────────────────────
+import os
+from google import genai
+
+api_key = os.getenv("GEMINI_API_KEY", "your-api-key-here")
+client = genai.Client(api_key=api_key)
 
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
@@ -411,24 +424,39 @@ with col_val:
         """, unsafe_allow_html=True)
 
 
-# ── Network Health ─────────────────────────────────────────────────────────────
-st.markdown("#### 🌐 Network Health Summary")
-nh_cols = st.columns(4)
-health_items = [
-    ("Finality", node_data['finality'], "Epochs since finalized"),
-    ("Slot", format_large_number(node_data['slot']), "Current beacon slot"),
-    ("Epoch", format_large_number(node_data['epoch']), "Current epoch"),
-    ("Active Validators", format_large_number(node_data['active_validators']), "Total active on network"),
-]
-for col, (label, value, sub) in zip(nh_cols, health_items):
-    with col:
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">{label}</div>
-            <div class="metric-value" style="font-size:22px;">{value}</div>
-            <div class="metric-sub">{sub}</div>
-        </div>
-        """, unsafe_allow_html=True)
+# ── Gemini Chat ─────────────────────────────────────────────────────────────
+st.markdown("#### 🤖 Gemini AI Chat")
+st.markdown("Ask questions about Ethereum, blockchain, or get help with your node!")
+
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Accept user input
+if prompt := st.chat_input("Ask Gemini..."):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        try:
+            response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
+            response_text = response.text
+            st.markdown(response_text)
+            # Add assistant response to chat history
+            st.session_state.messages.append({"role": "assistant", "content": response_text})
+        except Exception as e:
+            error_msg = f"Sorry, I couldn't process your request. Error: {str(e)}"
+            st.markdown(error_msg)
+            st.session_state.messages.append({"role": "assistant", "content": error_msg})
 
 
 # ── Auto Refresh ──────────────────────────────────────────────────────────────
